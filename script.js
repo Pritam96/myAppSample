@@ -1,3 +1,5 @@
+console.log('Hello World');
+
 const library = [
   {
     title: 'Learn JavaScript',
