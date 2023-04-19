@@ -1,89 +1,49 @@
-// TRAVERSING THE DOM
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
 
-var itemList = document.querySelector('#items');
+form.addEventListener('submit', addItem);
 
-// parentElement
-console.log(itemList.parentElement); // div#main.card.card-body
-// changing backgroundColor
-itemList.parentElement.style.backgroundColor = '#f4f4f4';
+itemList.addEventListener('click', removeItem);
 
-// chaining parentNode
-console.log(itemList.parentElement.parentElement); // div.container
+function addItem(e) {
+  e.preventDefault();
+  //   console.log('Working');
+  var textInput = document.getElementById('item').value;
+  console.log(textInput);
 
-console.log(itemList.parentElement.parentElement.parentElement); // body
+  var li = document.createElement('li');
+  li.className = 'list-group-item';
+  li.appendChild(document.createTextNode(textInput));
 
-// children
-console.log(itemList.children);
-itemList.children[1].style.backgroundColor = 'yellow';
+  var button = document.createElement('button');
+  button.className = 'btn btn-danger btn-sm float-right delete';
+  button.appendChild(document.createTextNode('X'));
 
-// firstChild
-console.log(itemList.firstChild);
+  //   console.log(button);
+  li.appendChild(button);
 
-// lastChild
-console.log(itemList.lastChild);
+  itemList.appendChild(li);
+}
 
-// firstElementChild
-console.log(itemList.firstElementChild);
-itemList.firstElementChild.textContent = 'Hello 1';
+function removeItem(e) {
+  // if only the delete button is clicked
+  if (e.target.classList.contains('delete')) {
+    // console.log('delete clicked');
+    if (confirm('Are you sure?')) {
+      // the target <li>, which is parentElement of the target delete button
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
 
-// lastElementChild
-console.log(itemList.lastElementChild);
-itemList.lastElementChild.textContent = 'Hello 4';
+var editButton = document.createElement('Button');
+editButton.className = 'btn btn-primary btn-sm float-right mr-2 edit';
+editButton.appendChild(document.createTextNode('Edit'));
+// console.log(editButton);
 
-// nextSibling
-console.log(itemList.nextSibling);
-
-// previousSibling
-console.log(itemList.previousSibling);
-
-// nextElementSibling
-console.log(itemList.nextElementSibling);
-
-// previousElementSibling
-console.log(itemList.previousElementSibling);
-itemList.previousElementSibling.style.color = 'green';
-
-// create a new div
-var newDiv = document.createElement('div');
-
-// add class
-newDiv.className = 'hello';
-
-// add id
-newDiv.id = 'hello1';
-
-// add attribute
-newDiv.setAttribute('title', 'hello-div');
-
-// create a text node
-var newDivText = document.createTextNode('Hello World');
-
-// add text to div
-newDiv.appendChild(newDivText);
-
-// add the div to our dom
-var container = document.querySelector('header .container');
-
-// console.log(container);
-
-var h1 = document.querySelector('header h1');
-
-container.insertBefore(newDiv, h1);
-
-newDiv.style.fontSize = '30px';
-
-console.log(newDiv);
-
-// Task - 7 add Hello Word before item 1
-
-var text = document.createTextNode('Hello World');
-var div = document.createElement('div');
-div.appendChild(text);
-
-var ul = document.querySelector('ul');
-// console.log(ul);
-
-var item1 = document.querySelector('.list-group-item');
-// console.log(item1);
-
-ul.insertBefore(div, item1);
+var list = document.querySelectorAll('.list-group-item');
+console.log(list);
+for (var i = 0; i < list.length; i++) {
+  list[i].appendChild(editButton);
+}
