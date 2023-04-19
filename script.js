@@ -1,19 +1,19 @@
-var headerTitle = document.getElementById('header-title');
-console.log(headerTitle);
+// Deliverable - 1
+// querySelectorAll
+var items = document.querySelectorAll('.list-group-item');
+console.log(items);
 
-headerTitle.style.borderBottom = 'solid 4px #000';
+// making the 2nd item background color to green
+items[1].style.backgroundColor = 'green';
 
-var addItem = document.getElementsByClassName('title');
-console.log(addItem);
-addItem[0].style.fontWeight = 'bold';
-addItem[0].style.color = 'green';
+// making the 3rd item invisible
+items[2].style.display = 'none';
 
-// var li = document.getElementsByClassName('list-group-item');
-var li = document.getElementsByTagName('li');
+// Deliverable - 2
+// changing font color to green for second item
+items[1].style.color = 'green';
 
-li[2].style.backgroundColor = 'green';
-for (var i = 0; i < li.length; i++) {
-  li[i].style.fontWeight = 'bold';
+// changing odd items background to green
+for (var i = 0; i < items.length; i += 2) {
+  items[i].style.backgroundColor = 'green';
 }
-
-li[4].className = 'list-group-item';
